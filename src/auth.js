@@ -1,10 +1,16 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from 'firebase/firestore'
+// import { initializeApp } from "firebase/app";
+// // import { getAnalytics } from "firebase/analytics";
+// import { getFirestore } from 'firebase/firestore'
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
+// import { getAuth } from "firebase/auth";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+// import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getAuth } from "firebase/auth";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
     signOut,
     onAuthStateChanged,
@@ -36,7 +42,7 @@ loginBtn.addEventListener("click", async () => {
     try {
         await signInWithPopup(auth, provider);
         // Redirect to your main app page after successful login
-        window.location.href = "home.html"; 
+        window.location.href = "home.html";
     } catch (error) {
         console.error(error);
         alert("Google Sign-In failed");
