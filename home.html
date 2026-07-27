@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Firebase Movie Manager</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #addMovie {
+            width: 100%;
+            padding: 12px;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #addMovie:hover {
+            background: #e68900;
+        }
+
+        .movie-card {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-card h3 {
+            margin: 0 0 5px 0;
+        }
+
+        .movie-card p {
+            margin: 0;
+            color: #666;
+        }
+
+        .delete-btn {
+            background: #e53935;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #c62828;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    
+
+<button id="logoutBtn">Logout</button>
+    <div class="container">
+
+        <h1>🎬 Firebase Movie Manager</h1>
+
+        <div class="form">
+
+            <input
+                type="text"
+                id="title"
+                placeholder="Enter movie title"
+            >
+
+            <input
+                type="number"
+                id="date"
+                placeholder="Enter release year"
+            >
+
+            <button id="addMovie">
+                Add Movie
+            </button>
+
+        </div>
+
+
+        <h2>Movies</h2>
+
+        <div id="movieList"></div>
+
+    </div>
+
+
+    <script
+        type="module"
+        src="./src/script.js"
+    ></script>
+
+</body>
+
+</html>
