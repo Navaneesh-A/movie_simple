@@ -1,17 +1,28 @@
 import { db, auth } from "../config/firebase.js";
+// import {
+//     collection,
+//     addDoc,
+//     getDocs,
+//     deleteDoc,
+//     doc
+// } from "firebase/firestore";
+
+// import {
+//     signOut,
+//     onAuthStateChanged
+// } from "firebase/auth";
 import {
     collection,
     addDoc,
     getDocs,
     deleteDoc,
     doc
-} from "firebase/firestore";
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import {
     signOut,
     onAuthStateChanged
-} from "firebase/auth";
-
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 // --------------------
 // Protect Home Page
