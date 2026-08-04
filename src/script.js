@@ -1,4 +1,18 @@
 import { db, auth } from "../config/firebase.js";
+
+
+import {
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    doc
+} from "firebase/firestore";
+
+import {
+    signOut,
+    onAuthStateChanged
+} from "firebase/auth";
 // import {
 //     collection,
 //     addDoc,
@@ -11,23 +25,11 @@ import { db, auth } from "../config/firebase.js";
 //     signOut,
 //     onAuthStateChanged
 // } from "firebase/auth";
-import {
-    collection,
-    addDoc,
-    getDocs,
-    deleteDoc,
-    doc
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-import {
-    signOut,
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 // --------------------
 // Protect Home Page
 // --------------------
-
+import dbx from "../dropbox.js";
 onAuthStateChanged(auth, (user) => {
 
     if (!user) {
@@ -38,8 +40,8 @@ onAuthStateChanged(auth, (user) => {
     getMovies();
 
 });
-
-
+console.log(db);
+console.log("DB =", db);
 // --------------------
 // DOM Elements
 // --------------------
@@ -49,12 +51,43 @@ const dateInput = document.getElementById("date");
 const addButton = document.getElementById("addMovie");
 const movieList = document.getElementById("movieList");
 const logoutBtn = document.getElementById("logoutBtn");
-
+const fileInput = document.getElementById("fileInput");
+const uploadBtn = document.getElementById("uploadBtn");
 
 // --------------------
 // Logout
 // --------------------
+uploadBtn.addEventListener("click", uploadToDropbox);
+async function uploadToDropbox() {
 
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Please choose a file.");
+        return;
+    }
+
+    try {
+
+        await dbx.filesUpload({
+
+            path: "/" + file.name,
+            contents: file
+
+        });
+
+        alert("File uploaded successfully!");
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        console.log(await error.error);
+
+    }
+
+}
 logoutBtn.addEventListener("click", async () => {
 
     await signOut(auth);
@@ -110,19 +143,18 @@ async function getMovies() {
 
     movieList.innerHTML = "";
 
-    try {
 
-        const querySnapshot = await getDocs(collection(db, "movies"));
+    const querySnapshot = await getDocs(collection(db, "movies"));
 
-        querySnapshot.forEach((movieDocument) => {
+    querySnapshot.forEach((movieDocument) => {
 
-            const movie = movieDocument.data();
+        const movie = movieDocument.data();
 
-            const div = document.createElement("div");
+        const div = document.createElement("div");
 
-            div.className = "movie-card";
+        div.className = "movie-card";
 
-            div.innerHTML = `
+        div.innerHTML = `
                 <div>
                     <h3>${movie.title}</h3>
                     <p>${movie.date}</p>
@@ -133,22 +165,18 @@ async function getMovies() {
                 </button>
             `;
 
-            div.querySelector(".delete-btn")
-                .addEventListener("click", () => {
-                    deleteMovie(movieDocument.id);
-                });
+        div.querySelector(".delete-btn")
+            .addEventListener("click", () => {
+                deleteMovie(movieDocument.id);
+            });
 
-            movieList.appendChild(div);
+        movieList.appendChild(div);
 
-        });
-
-    } catch (error) {
-
-        console.error(error);
-
-    }
+    });
 
 }
+
+
 
 
 // --------------------

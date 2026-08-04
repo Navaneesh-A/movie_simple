@@ -5,6 +5,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dropbox": "^10.34.0",
     "firebase": "^12.16.0"
   },
   "devDependencies": {
