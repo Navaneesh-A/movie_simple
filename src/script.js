@@ -122,29 +122,8 @@ async function addMovie() {
 
         titleInput.value = "";
         dateInput.value = "";
+
         getMovies();
-
-        try {
-            const response = await fetch("http://localhost:3000/api/movies", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    title: title,
-                    date: Number(date)
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error(`MongoDB API returned ${response.status}`);
-            }
-
-            alert("Movie added to Firebase and MongoDB.");
-        } catch (mongoError) {
-            console.error("Movie was saved to Firebase but not MongoDB:", mongoError);
-            alert("Movie was saved to Firebase, but the MongoDB copy failed. Check that the backend is running.");
-        }
 
     } catch (error) {
 
